@@ -18,3 +18,17 @@ modalClose.addEventListener('click', () => modal.classList.remove('show-modal'))
 
 // Event listener to close modal outside modal click event
 window.addEventListener('click', (e) => (e.target === modal ? modal.classList.remove('show-modal') : false));
+
+// Handle Data From Form
+function storeBookmark(e){
+    e.preventDefault();
+    const nameValue = websiteNameEl.value;
+    let urlValue = websiteUrlEl.value;
+    if (!urlValue.includes('http://', 'https://')){
+        urlValue = `https://${urlValue}`;
+    }
+    console.log(nameValue, urlValue);
+}
+
+// Further Event Listeners
+bookmarkForm.addEventListener('submit', storeBookmark)

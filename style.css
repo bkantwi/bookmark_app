@@ -76,6 +76,12 @@ a:active{
   z-index: 2;
 }
 
+.fa-times{
+  float: right;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .name{
   margin-top: 20px;
   margin-right: 20px;
@@ -88,8 +94,32 @@ a:active{
   margin-right: 5px;
 }
 
+/* Modal Styling */
+.modal-container{
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.show-modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal{
+  background: white;
+  box-sizing: 0 0 10px rgba(0, 0, 0, 0.8);
+  max-width: 95%;
+  width: 500px;
+}
+
 /* Media Query */
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .container{
     flex-direction: column;
   }

@@ -6,6 +6,8 @@ const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl = document.getElementById('website-url');
 const bookmarkContainer = document.getElementById('bookmarks-container');
 
+let bookmarks = [];
+
 // Show Midal, Focus on Input
 function showModal() {
     modal.classList.add('show-modal');
@@ -46,10 +48,19 @@ function storeBookmark(e){
     if (!urlValue.includes('http://', 'https://')){
         urlValue = `https://${urlValue}`;
     }
-    console.log(nameValue, urlValue);
     if(!validate(nameValue, urlValue)){
         return false;
     }
+
+    const bookmark = {
+        name: nameValue,
+        url: urlValue,
+    };
+    bookmarks.push(bookmark);
+    console.log(JSON.stringify(bookmarks));
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    bookmarkForm.requestFullscreen();
+    websiteNameEl.focus();
 }
 
 // Further Event Listeners

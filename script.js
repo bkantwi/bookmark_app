@@ -1,6 +1,6 @@
 const modal = document.getElementById('modal');
 const modalShow = document.getElementById('show-modal');
-const modalClos = document.getElementById('close-modal');
+const modalClose = document.getElementById('close-modal');
 const bookmarkForm = document.getElementById('bookmark-form');
 const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl = document.getElementById('website-url');
@@ -14,3 +14,7 @@ function showModal() {
 
 // Modal Event Listener
 modalShow.addEventListener('click', showModal);
+modalClose.addEventListener('click', () => modal.classList.remove('show-modal'));
+
+// Event listener to close modal outside modal click event
+window.addEventListener('click', (e) => (e.target === modal ? modal.classList.remove('show-modal') : false));

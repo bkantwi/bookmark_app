@@ -1,0 +1,7 @@
+{
+    "workbench.colorTheme": "Vue Theme",
+    "workbench.iconTheme": "eq-material-theme-icons-light",
+    "typescript.inlayHints.enumMemberValues.enabled": true,
+    "jupyter.themeMatplotlibPlots": true,
+    "material-icon-theme.folders.theme": "classic"
+}

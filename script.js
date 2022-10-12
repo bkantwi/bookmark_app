@@ -40,6 +40,24 @@ function validate(nameValue, urlValue){
     return true;
 }
 
+// Fetch Bookmarks from local storage
+function fetchBookmarks(){
+    // Get bookmarks from local storage if some are available
+    if (localStorage.getItem('bookmarks')){
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    } else {
+        // create bookmarks array in local storage
+        bookmarks = [
+            {
+                name: 'Property of Bkantwi',
+                url: 'https://arktech.netlify.app',
+            },
+        ];
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+    console.log(bookmarks);
+}
+
 // Handle Data From Form
 function storeBookmark(e){
     e.preventDefault();
@@ -57,11 +75,15 @@ function storeBookmark(e){
         url: urlValue,
     };
     bookmarks.push(bookmark);
-    console.log(JSON.stringify(bookmarks));
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    bookmarkForm.requestFullscreen();
+    fetchBookmarks();
+    bookmarkForm.reset();
+    // bookmarkForm.requestFullscreen();
     websiteNameEl.focus();
 }
 
 // Further Event Listeners
 bookmarkForm.addEventListener('submit', storeBookmark)
+
+// On load fetch bookmarks
+fetchBookmarks();

@@ -4,7 +4,7 @@ const modalClose = document.getElementById('close-modal');
 const bookmarkForm = document.getElementById('bookmark-form');
 const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl = document.getElementById('website-url');
-const bookmarkContainer = document.getElementById('bookmarks-container');
+const bookmarksContainer = document.getElementById('bookmarks-container');
 
 let bookmarks = [];
 
@@ -40,6 +40,44 @@ function validate(nameValue, urlValue){
     return true;
 }
 
+// Build bookmarks DOM
+function buildBookmarks(){
+    // build items
+    bookmarks.forEach((bookmark)=>{
+        // pull name and url
+        const {name, url} = bookmark;
+        // Item
+        const item = document.createElement('div');
+        item.classList.add('item');
+        
+        // Close icon
+        const closeIcon = document.createElement('i');
+        closeIcon.classList.add('fas', 'fa-trash');
+        closeIcon.setAttribute('title', 'Delete Bookmark');
+        closeIcon.setAttribute('onclick', `deleteBookmark('${url}')`);
+
+        // Favicon / Link Container
+        const linkInfo = document.createElement('div');
+        linkInfo.classList.add('name');
+
+        // Favicon
+        const favicon = document.createElement('img');
+        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicons?doamin=${url}`);
+        favicon.setAttribute('alt', 'Favicon');
+
+        // Link
+        const link = document.createElement('a');
+        link.setAttribute('href', `${url}`);
+        link.setAttribute('target', '_blank');
+        link.textContent = name;
+        
+        // Append to bookmarks container
+        linkInfo.append(favicon, link);
+        item.append(closeIcon, linkInfo);
+        bookmarksContainer.appendChild(item);
+    });
+}
+
 // Fetch Bookmarks from local storage
 function fetchBookmarks(){
     // Get bookmarks from local storage if some are available
@@ -55,7 +93,7 @@ function fetchBookmarks(){
         ];
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
-    console.log(bookmarks);
+    buildBookmarks();
 }
 
 // Handle Data From Form
